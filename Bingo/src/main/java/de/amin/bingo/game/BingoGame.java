@@ -3,6 +3,7 @@ package de.amin.bingo.game;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -13,7 +14,7 @@ import de.amin.bingo.utils.Config;
 
 public class BingoGame {
 
-    private HashMap<OfflinePlayer, BingoBoard> boards;
+    private HashMap<UUID, BingoBoard> boards;
     BingoMaterial[] items = new BingoMaterial[Config.BOARD_SIZE];
 
     public BingoGame() {
@@ -30,7 +31,7 @@ public class BingoGame {
             }
             items[i] = bingoMaterial;
         }
-        boards.put(player, new BingoBoard(items));
+        boards.put(player.getUniqueId(), new BingoBoard(items));
     }
 
     public boolean checkWin(Player player) {
@@ -66,10 +67,10 @@ public class BingoGame {
     }
 
     public BingoBoard getBoard(Player player) {
-        return boards.get(player);
+        return boards.get(player.getUniqueId());
     }
     
-    public HashMap<OfflinePlayer, BingoBoard> getBoards() {
+    public HashMap<UUID, BingoBoard> getBoards() {
         return boards;
     }
 
