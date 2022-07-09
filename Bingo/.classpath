@@ -24,7 +24,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ahmet/Desktop/Sunucu/Vestige/servers/Towny/plugins/LuckPerms-LATEST-[5.3.86].jar"/>
-	<classpathentry kind="lib" path="C:/Users/ahmet/Desktop/Sunucu/Vestige/servers/Towny/plugins/PlaceholderAPI-2.11.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/Vestige/servers/Towny/plugins/LuckPerms-LATEST-[5.3.86].jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/Vestige/servers/Towny/plugins/PlaceholderAPI-2.11.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

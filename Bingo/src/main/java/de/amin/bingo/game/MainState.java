@@ -34,7 +34,7 @@ public class MainState {
 
 		gameLoop = plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
 			playerManager.getPlayers().forEach(UUID -> { Player player = Bukkit.getPlayer(UUID);
-			if(player.isOnline()) {
+			if(player != null && player.isOnline()) {
 				if(game.checkWin(player)) {
 					for(ItemStack item : player.getInventory().all(Material.FILLED_MAP).values())  {
 						if (item != null && item.getItemMeta().hasCustomModelData() &&  item.getItemMeta().getCustomModelData() == 1001) {
