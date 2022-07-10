@@ -32,15 +32,15 @@ public final class BingoPlugin extends JavaPlugin {
 
         PlayerManager  playerManager= new PlayerManager();
 
-        BingoGame game = new BingoGame();
-        BoardRenderer renderer = new BoardRenderer(this, game);
+        BingoGame game = new BingoGame(this);
+        
         
         MainState mainState = new MainState(this, game, playerManager);
         
         Scheduler scheduler = new Scheduler(this, playerManager);
 
         registerListeners(getServer().getPluginManager(), playerManager, game);
-        registerCommands(game, renderer, playerManager);
+        registerCommands(game, playerManager);
         
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null)
             new Placeholder(this, scheduler).register();
@@ -50,8 +50,8 @@ public final class BingoPlugin extends JavaPlugin {
         pluginManager.registerEvents(new DropListener(playerManager), this);
     }
 
-    private void registerCommands(BingoGame game, BoardRenderer renderer, PlayerManager playerManager) {
-        getCommand("reroll").setExecutor(new RerollCommand(this, game, renderer, playerManager));
+    private void registerCommands(BingoGame game, PlayerManager playerManager) {
+        getCommand("reroll").setExecutor(new RerollCommand(this, game, playerManager));
     }
 
 }

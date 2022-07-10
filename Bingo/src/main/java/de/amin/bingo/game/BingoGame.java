@@ -8,17 +8,21 @@ import java.util.UUID;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import de.amin.bingo.BingoPlugin;
 import de.amin.bingo.game.board.BingoBoard;
 import de.amin.bingo.game.board.BingoMaterial;
+import de.amin.bingo.game.board.map.BoardRenderer;
 import de.amin.bingo.utils.Config;
 
 public class BingoGame {
 
     private HashMap<UUID, BingoBoard> boards;
+    private BingoPlugin plugin;
     BingoMaterial[] items = new BingoMaterial[Config.BOARD_SIZE];
 
-    public BingoGame() {
+    public BingoGame(BingoPlugin plugin) {
         boards = new HashMap<>();
+        this.plugin = plugin;
     }
 
     public void createBoard(Player player) {
@@ -31,7 +35,10 @@ public class BingoGame {
             }
             items[i] = bingoMaterial;
         }
-        boards.put(player.getUniqueId(), new BingoBoard(items));
+
+        BoardRenderer renderer= new BoardRenderer(plugin, this);
+        boards.put(player.getUniqueId(), new BingoBoard(items, renderer));
+        renderer.updateImages();
     }
 
     public boolean checkWin(Player player) {

@@ -25,14 +25,13 @@ import de.amin.bingo.team.PlayerManager;
 public class RerollCommand implements CommandExecutor {
 
     private BingoGame game;
-    private BoardRenderer renderer;
     private PlayerManager playerManager;
     static FileConfiguration config = BingoPlugin.INSTANCE.getConfig();
 
-    public RerollCommand(BingoPlugin plugin, BingoGame game, BoardRenderer renderer, PlayerManager playerManager) {
+    public RerollCommand(BingoPlugin plugin, BingoGame game, PlayerManager playerManager) {
         this.game = game;
-        this.renderer = renderer;
         this.playerManager = playerManager;
+        
     }
 
     @Override
@@ -52,8 +51,7 @@ public class RerollCommand implements CommandExecutor {
         player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_CLUSTER_BREAK,1,1);
 
         game.createBoard(player);
-        renderer.updateImages();
-        ItemStack boardMap = getRenderedMapItem();
+        ItemStack boardMap = getRenderedMapItem(player);
         for(ItemStack notCool : player.getInventory().addItem(boardMap).values()) {
         	player.sendMessage(config.getString("Messages.3"));
         	return false;
@@ -62,13 +60,14 @@ public class RerollCommand implements CommandExecutor {
         return true;
     }
     
-    private ItemStack getRenderedMapItem() {
+    private ItemStack getRenderedMapItem(Player player) {
         ItemStack itemStack = new ItemStack(Material.FILLED_MAP);
         MapView view = Bukkit.createMap(Bukkit.getWorlds().get(0));
         //clear renderers one by one
         for (MapRenderer renderer : view.getRenderers())
             view.removeRenderer(renderer);
 
+        BoardRenderer renderer = game.getBoard(player).getRenderer();
         view.addRenderer(renderer);
         MapMeta mapMeta = (MapMeta) itemStack.getItemMeta();
         mapMeta.setMapView(view);
