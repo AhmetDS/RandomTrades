@@ -32,17 +32,21 @@ public class Scheduler {
 			// Looping it.
 			new Scheduler(plugin, playerManager);
 			
-			Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-
-				@Override
-				public void run() {
-					// Removing players from cooldown
-				 	playerManager.getTimed().forEach(timed -> playerManager.removeTimed(timed));
-					
-				}
-				
-			}, 40 * 60);
+			Task();
 		}
+	}
+	
+	public void Task() {
+		Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+
+			@Override
+			public void run() {
+				// Removing players from cooldown
+			 	playerManager.getTimed().forEach(timed -> playerManager.removeTimed(timed));
+				
+			}
+			
+		}, 40 * 60);
 	}
 
 	public Scheduler(BingoPlugin plugin, PlayerManager playerManager) {
