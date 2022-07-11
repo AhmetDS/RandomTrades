@@ -1,7 +1,0 @@
-name: RandomTrades
-description: randomtrades
-version: 0.0.1-SNAPSHOT
-api-version: 1.18
-main: com.ahmetdinc.randomtrades.RandomTrades
-author: ahmetdinc
-depend: [PlaceholderAPI]
